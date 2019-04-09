@@ -103,21 +103,27 @@
   _.uniq = function(array, isSorted, iterator) {
     var temp = [];
     var output = [];
-    // for (iterator === undefined){
-    //   iterator = _.identity;
-    // }
+    if (iterator === undefined){
+      iterator = _.identity;
+    }
     _.each(array, function(value){
-      if (iterator !== undefined){
-        if(_.indexOf(temp, iterator(value)) === -1){
-          output.push(value);
-          temp.push(iterator(value));
+      if(_.indexOf(temp, iterator(value)) === -1){
+           output.push(value);
+           temp.push(iterator(value));
         }
-      } else {
-        if(_.indexOf(output, value) === -1){
-          output.push(value);
-        }
-      }
-    })
+    });
+    // _.each(array, function(value){
+    //   if (iterator !== undefined){
+    //     if(_.indexOf(temp, iterator(value)) === -1){
+    //       output.push(value);
+    //       temp.push(iterator(value));
+    //     }
+    //   } else {
+    //     if(_.indexOf(output, value) === -1){
+    //       output.push(value);
+    //     }
+    //   }
+    // })
     return output;
 
   };
@@ -128,13 +134,18 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var output = [];
+    _.each(collection, function(value){
+      output.push(iterator(value));
+    })
+    return output;
   };
 
   /*
    * TIP: map is really handy when you want to transform an array of
    * values into a new array of values. _.pluck() is solved for you
    * as an example of this.
-   */
+   */  
 
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
@@ -169,6 +180,7 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    
   };
 
   // Determine if the array or object contains a given value (using `===`).
